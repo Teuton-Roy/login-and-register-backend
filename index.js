@@ -12,4 +12,16 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+//Through mongoose we create a new database & connect through mongoose//
 
+//Configration Mongoose//
+
+mongoose.connect('mongodb://localhost:27017/MyDatabase', {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    useCreateIndex: true,
+    useFindAndModify: false
+}, () => {
+    //After database connected this message will appear//
+    console.log('Database connected');
+})
