@@ -27,11 +27,38 @@ mongoose.connect('mongodb://localhost:27017/MyDatabase', {
     console.log('Database connected');
 })
 
-//Define Routes//
-
-app.get("/",(req, res) =>{
-    res.send("API SEND!")
+//Create a new Schema//
+const userSchema = new mongoose.Schema({
+    name: String,
+    email: String,
+    password: String
 })
+
+//Create a new Model//
+const User = mongoose.model('User', userSchema);
+
+//Create a new document//
+const user = new User({
+
+})
+
+
+//Define Routes according to the proiject//
+
+/*app.get("/",(req, res) =>{
+    res.send("API SEND!")
+})*/
+
+//we need post request for login and register//
+
+app.post("/login",(req, res) => {
+    res.send("Login API SEND!")
+})
+
+app.post("/signup",(req, res) => {
+    res.send("Signup API SEND!")
+})
+
 
 //Create a new port//
 app.listen(5000, () => {
@@ -48,3 +75,4 @@ app.listen(5000, () => {
         =>mongoose.set('strictQuery', true);
     2. or set strictQuery option to false globally to prepare for the change
         =>mongoose.set('strictQuery', false); */
+
