@@ -5,6 +5,8 @@
 import express from 'express';
 import cors from 'cors';
 import mongoose from 'mongoose';
+import req from 'express/lib/request';
+import res from 'express/lib/response';
 
 //Configration nodeJs//
 const app = express();
@@ -24,4 +26,14 @@ mongoose.connect('mongodb://localhost:27017/MyDatabase', {
 }, () => {
     //After database connected this message will appear//
     console.log('Database connected');
+})
+
+//Define Routes//
+app.get("/",(req, res) =>{
+    res.send("My API")
+})
+
+//Create a new port//
+app.listen(5000, () => {
+    console.log("Server is running");
 })
