@@ -37,10 +37,6 @@ const userSchema = new mongoose.Schema({
 //Create a new Model//
 const User = mongoose.model('User', userSchema);
 
-//Create a new document//
-const user = new User({
-
-})
 
 
 //Define Routes according to the proiject//
@@ -56,7 +52,8 @@ app.post("/login",(req, res) => {
 })
 
 app.post("/signup",(req, res) => {
-    res.send("Signup API SEND!")
+    // res.send("Signup API SEND!")
+    console.log(req.body)
 })
 
 
