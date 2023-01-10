@@ -48,9 +48,30 @@ const User = mongoose.model('User', userSchema);
 //we need post request for login and register//
 
 app.post("/login",(req, res) => {
-    res.send("Login API SEND!")
+    // res.send("Login API SEND!")
+    // console.log(req.body) => to show in network//
+
+    const {email, password} = req.body
+
+    User.findOne({email: email}, (err, user) =>
+     {
+        if (user) {
+            if(password === user.password){
+                res.send({message:"Login successfull", user: user})
+            }
+            else{
+                res.send({message: "Password is incorrect"})
+            }
+        }else{
+            res.status(404).send({message: "User not registerd"})
+            /*throw er; // Unhandled 'error' event
+              ^       TypeError: req.send is not a function   
+              req.send({message: "User not registerd"})*/
+        }
+    })
 })
  
+
 app.post("/signup",(req, res) => {
     // res.send("Signup API SEND!")
     // console.log(req.body) => to show in network//
