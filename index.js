@@ -50,10 +50,35 @@ const User = mongoose.model('User', userSchema);
 app.post("/login",(req, res) => {
     res.send("Login API SEND!")
 })
-
+ 
 app.post("/signup",(req, res) => {
     // res.send("Signup API SEND!")
-    console.log(req.body)
+    // console.log(req.body) => to show in network//
+
+    const {name, email, password} = req.body;
+
+    //If, user already registered. then either return a error or return user object//
+    User.findOne({email : email},(err, user) => {
+        if(user){
+            res.send({message: "User already registered"})
+        } else{
+            //create user-object in mongodb with this name,email,password//
+            const user = new User({
+                name,
+                email,
+                password
+            })
+            //save user-object in mongodb//
+            //When it store the details than maybe problem in connection that's why take a callby option in save method//
+            user.save(err => {
+                if(err){
+                    res.send(err)
+                }else{
+                    res.send({message: "Registration successfull"})
+                }
+            })
+        }
+    })
 })
 
 
