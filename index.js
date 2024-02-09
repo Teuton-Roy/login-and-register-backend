@@ -95,7 +95,7 @@ app.post("/signup",(req, res) => {
                 if(err){
                     res.send(err)
                 }else{
-                    res.send({message: "Registration successfull"})
+                    res.send({message: "Registration successfull, Please login now🙂"})
                 }
             })
         }
